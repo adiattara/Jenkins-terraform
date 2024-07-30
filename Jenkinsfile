@@ -20,15 +20,17 @@ pipeline {
                     }
                 }
             }
-        stage('Plan') {
-                   steps {
-                                   script {
-                                       withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                                           sh 'pwd; cd terraform/ ; terraform init'
-                                           sh 'pwd; cd terraform/ ; terraform plan -out tfplan'
-                                       }
-                                   }
-                   }
+        stage('Terraform Plan') {
+                    steps {
+                        script {
+                            withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                sh '''
+                                    cd terraform
+                                    terraform plan -out=tfplan
+                                '''
+                            }
+                        }
+                    }
         }
 
     }

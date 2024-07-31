@@ -17,7 +17,7 @@ pipeline {
                         {
                             git branch: 'main', url: 'https://github.com/adiattara/Jenkins-terraform.git'
                         }
-                    }
+
                 }
             }
         }
@@ -36,6 +36,7 @@ pipeline {
                     }
         }
 
+
     }
 
-  }
+}

@@ -26,10 +26,9 @@ pipeline {
                         script {
                             withCredentials([aws(credentialsId: 'awsFoo', accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-                                sh '''
-                                    cd terraform
-                                    terraform plan -out=tfplan
-                                '''
+                                sh 'pwd;cd terraform/ ; terraform init'
+                                sh "pwd;cd terraform/ ; terraform plan -out tfplan"
+                                sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
                             }
                         }
                     }

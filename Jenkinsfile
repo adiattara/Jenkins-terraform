@@ -24,7 +24,8 @@ pipeline {
         stage('Terraform Plan') {
                     steps {
                         script {
-                            withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            withCredentials([aws(credentialsId: 'awsFoo', accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                                 sh '''
                                     echo "AWS_ACCESS_KEY_ID = $AWS_ACCESS_KEY_ID"
                                     echo "AWS_SECRET_ACCESS_KEY = $AWS_SECRET_ACCESS_KEY"

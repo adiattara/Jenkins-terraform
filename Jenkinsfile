@@ -49,9 +49,15 @@ pipeline {
                    }
         }
         stage('Apply') {
-                    steps {
-                        sh "pwd;cd terraform/ ; terraform apply -input=false tfplan"
+
+                    script {
+                         withCredentials([aws(credentialsId: 'awsFoo', accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                                   sh "pwd;cd terraform/ ; terraform apply -input=false tfplan"
+                          }
+
                     }
+
         }
 
 
